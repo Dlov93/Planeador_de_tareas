@@ -1,0 +1,24 @@
+:root{
+    --ColorBotones--blue: rgb(40, 159, 238); 
+    --ColorSeleccion--Rojo: rgb(204, 144, 144);
+    --ColorSeleccion--Verde: rgb(144, 204, 162);
+    --ColorSeleccion--Amarillo: rgb(198, 204, 144);
+
+}
+#BotonGuardar{
+    background-color: var(--ColorBotones--blue);
+}
+#opcion_baja{
+    background-color: var(--ColorSeleccion--Verde);
+}
+#opcion_Media{
+    background-color: var(--ColorSeleccion--Amarillo);
+}
+#opcion_Alta{
+    background-color: var(--ColorSeleccion--Rojo);
+}
+#cabecera{
+    background-color: rgb(248, 196, 239);
+    height: 100px;
+    align-content: center;
+}
