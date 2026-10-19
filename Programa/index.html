@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planeador Tareas DLOV</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker-bs5.min.css">
+</head>
+
+<body>
+    <header id="cabecera" class="header text-center">
+        <!--Header de la pagina-->
+        <h2>Planificador de Actividades</h2>
+    </header>
+    <!--rejilla principal del diseño de la pagina 4 columnas-->
+    <div class="container-fluid mt-4">
+
+        <div class="row">
+            <div class="col-lg-3 col-md-4 mb-4" id="columna_formulario">
+                <!--Formulario para asignacion de tarea-->
+                <div class="card p-3 shadow-sm" id="Trajeta_Formulario">
+                    <div class="card-body text-center">
+                        <!--Tarjeta del formulario-->
+                        <h4 class="card-title" id="Tarejta_form">Ingreso de Actividad</h4>
+                        <div class="form-field" id="campo_nombre_tarea">
+                            <label for="exampleFormControlTextarea1" class="form-label">Nombre Tarea</label>
+                            <input class="form-control" id="input_nombre_tarea"></input>
+                        </div>
+                        <div class="form-field" id="campo_Descripcion">
+                            <label for="exampleFormControlTextarea2" class="form-label"
+                                id="label_campo_Descripcion">Descriopción</label>
+                            <textarea class="form-control" id="input_Descripcion" rows="4"></textarea>
+                        </div>
+                        <div class="form-field" id="campo_AsignadoA">
+                            <label for="exampleFormControlTextarea1" class="form-label"
+                                id="lable_campo_AsignadoA">Asignado a:</label>
+                            <input class="form-control" id="input_campo_AsignadoA"></input>
+                        </div>
+                        <div class="form-field" id="campo_fecha">
+                            <label for="exampleFormControlTextarea1" class="form-label" id="lable_campo_fecha">Fecha
+                                finalización</label>
+                            <input type="datetime-local" class="form-control"
+                                aria-label="Date and time picker with seconds" value="2026-02-24T13:00:30" step="1"
+                                id="Fecha">
+                        </div>
+                        <div>
+                            <div class="form-field">
+                                <label for="exampleFormControlSelect2" class="form-label">Prioridad</label>
+                                <select class="form-control" id="Barra_selectora">
+                                    <option selected>Choose one…</option>
+                                    <option value="Baja" id="opcion_baja">Baja</option>
+                                    <option value="Media" id="opcion_Media">Media</option>
+                                    <option value="Alta" id="opcion_Alta">Alta</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <button type="button" class="btn" id="BotonGuardar">Guardar</button>
+                    </div>
+                </div>
+                <!--aqui-->
+
+            </div>
+            <div class="col-lg-9 col-md-4">
+                <div class="row row-cols-1 row-cols-md-5 g-2 text-center">
+                    <div class="col bg-light border">
+
+                        <div data-bs-toggle="datepicker" data-mes="01-01-2027" class="d-inline-block"></div>
+                        <div id="Contenedor-tareas-Enero" class="row mt-4"></div>
+                    </div>
+                    <div class="col bg-light border">
+
+                        <div data-bs-toggle="datepicker" data-mes="02-01-2027" class="d-inline-block"></div>
+                        <div id="Contenedor-tareas-feb" class="row mt-4"></div>
+                    </div>
+                    <div class="col bg-light border">
+
+                        <div data-bs-toggle="datepicker" data-mes="03-01-2027" class="d-inline-block"></div>
+                        <div id="Contenedor-tareas-MArz" class="row mt-4"></div>
+                    </div>
+                    <div class="col bg-light border">
+
+                        <div data-bs-toggle="datepicker" data-mes="04-01-2027" class="d-inline-block"></div>
+                        <div id="Contenedor-tareas-Abril" class="row mt-4"></div>
+                    </div>
+                </div>
+                <div class="row row-cols-1 row-cols-md-5 g-2 text-center">
+                    <div class="col bg-light border">
+
+                        <div data-bs-toggle="datepicker" data-mes="05-01-2027" class="d-inline-block">
+                            <div id="Contenedor-tareas-Mayo" class="row mt-4"></div>
+
+                        </div>
+                    </div>
+                    <div class="col bg-light border">
+
+                        <div data-bs-toggle="datepicker" data-mes="06-01-2027" class="d-inline-block">
+                            <div id="Contenedor-tareas-junio" class="row mt-4"></div>
+
+                        </div>
+                    </div>
+                    <div class="col bg-light border">
+
+                        <div data-bs-toggle="datepicker" data-mes="07-01-2027" class="d-inline-block">
+                            <div id="Contenedor-tareas-julio" class="row mt-4"></div>
+
+                        </div>
+                    </div>
+                    <div class="col bg-light border">
+
+                        <div data-bs-toggle="datepicker" data-mes="08-01-2027" class="d-inline-block">
+                            <div id="Contenedor-tareas-agosto" class="row mt-4"></div>
+
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-5 g-2 text-center">
+                        <div class="col bg-light border">
+
+                            <div data-bs-toggle="datepicker" data-mes="09-01-2027" class="d-inline-block">
+                                <div id="Contenedor-tareas-sep" class="row mt-4"></div>
+
+                            </div>
+                        </div>
+                        <div class="col bg-light border">
+
+                            <div data-bs-toggle="datepicker" data-mes="10-01-2026" class="d-inline-block"></div>
+                            <div id="Contenedor-tareas-Oct" class="row mt-4">
+
+                            </div>
+                        </div>
+
+                        <div class="col bg-light border">
+
+                            <div data-bs-toggle="datepicker" data-mes="11-01-2026" class="d-inline-block"></div>
+                            <div id="Contenedor-tareas-Nov" class="row mt-4"></div>
+                        </div>
+                        <div class="col bg-light border">
+
+                            <div data-bs-toggle="datepicker" data-mes="12-01-2026" class="d-inline-block"></div>
+                            <div id="Contenedor-tareas-Dic" class="row mt-4"></div>
+                        </div>
+                    </div>
+                
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+    <script src="script.js"></script>
+    <script src="eventos.js"></script>
+    <script src="calendario.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/js/datepicker-full.min.js"></script>
+
+    </div>
+    </div>
+</body>
+<footer id="pie" class="footer text-center">
+    Copyrigth DLOV
+</footer>
+
+</html>

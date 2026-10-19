@@ -1,0 +1,159 @@
+:root{
+    --ColorBotones--blue: rgb(40, 159, 238); 
+    --ColorSeleccion--Rojo: rgb(204, 144, 144);
+    --ColorSeleccion--Verde: rgb(144, 204, 162);
+    --ColorSeleccion--Amarillo: rgb(198, 204, 144);
+
+}
+#BotonGuardar{
+    background-color: var(--ColorBotones--blue);
+}
+#opcion_baja{
+    background-color: var(--ColorSeleccion--Verde);
+}
+#opcion_Media{
+    background-color: var(--ColorSeleccion--Amarillo);
+}
+#opcion_Alta{
+    background-color: var(--ColorSeleccion--Rojo);
+}
+#cabecera{
+    background-color: rgb(248, 196, 239);
+    height: 100px;
+    align-content: center;
+}
+
+#pie{
+    background-color: rgb(248, 196, 239);
+    height: 50px;
+    margin-top: 40px
+
+}
+.datepicker-cell {
+    width: 60px !important;  
+    height: 60px !important; 
+    border: 1px solid #dee2e6 !important; 
+    border-radius: 0 !important;          
+    
+    /* Cambiamos a formato columna para que el dato quede debajo del número */
+    display: flex !important;
+    flex-direction: column !important; 
+    justify-content: flex-start !important; 
+    padding: 2px !important;
+  }
+
+  /* El número en la esquina superior derecha */
+  .numero-dia {
+    text-align: right;
+    font-size: 14px;
+    margin-right: 4px;
+    margin-top: 2px;
+  }
+
+  /* El diseño de la etiquetita del dato */
+  .dato-dia {
+    font-size: 10px;
+    background-color: #0d6efd; /* Color azul de Bootstrap */
+    color: white;
+    border-radius: 3px;
+    text-align: center;
+    padding: 1px;
+    margin-top: 2px;
+    
+    /* Si el texto es muy largo, pone "..." para no deformar el cuadro */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .datepicker-cell:hover {
+    background-color: #f8f9fa !important;
+  }
+  .sticker-tarea {
+    
+    background-color: var(--ColorSeleccion--Amarillo, #fff3cd); 
+    border: 2px dashed #ffc107;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+    
+    /* ESTAS TRES LÍNEAS MÁGICAS EVITAN EL DESBORDE: */
+    word-wrap: break-word;       /*divide palabras para no se desborden*/
+    overflow-wrap: break-word;   /* Asegura que las palabras para no se desborden */
+    white-space: normal;         /* Permite que el texto fluya hacia abajo */
+
+}
+
+.sticker-tarea:hover {
+    transform: scale(1.02); 
+}
+
+/*calendarios fluidos*/ 
+.datepicker,
+.datepicker-view,
+.datepicker-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.datepicker-cell {
+    /* Mantiene el 100% dividido en los 7 días de la semana SIEMPRE */
+    width: 14.28% !important;  
+    height: auto !important; 
+    min-height: 55px !important; 
+    border: 1px solid #dee2e6 !important; 
+    border-radius: 0 !important;          
+    display: flex !important;
+    flex-direction: column !important; 
+    justify-content: flex-start !important; 
+    padding: 2px !important;
+}
+
+.numero-dia {
+    text-align: right;
+    font-size: 14px;
+    margin-right: 4px;
+    margin-top: 2px;
+}
+
+.dato-dia {
+    font-size: 10px;
+    background-color: #0d6efd; 
+    color: white;
+    border-radius: 3px;
+    text-align: center;
+    padding: 1px;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Ajustes especiales para Tablets (1024px y 768px) */
+@media (max-width: 1024px) {
+    .datepicker-cell {
+        min-height: 45px !important; /* Solo achicamos el alto, NUNCA el ancho */
+        padding: 1px !important;
+    }
+    .numero-dia {
+        font-size: 12px;
+    }
+    .dato-dia {
+        font-size: 9px;
+    }
+}
+
+/* Ajustes especiales para Celulares (hasta 767px) */
+@media (max-width: 767px) {
+    .datepicker-cell {
+        min-height: 40px !important; 
+    }
+    .numero-dia {
+        font-size: 11px;
+    }
+    .dato-dia {
+        font-size: 8px;
+    }
+}
