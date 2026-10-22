@@ -1,6 +1,5 @@
 
-
-//caragr calendarios
+//cargar calendarios
 document.addEventListener("DOMContentLoaded", function () {
   const misDatos = {};
   const contenedoresCalendario = document.querySelectorAll('[data-bs-toggle="datepicker"]');

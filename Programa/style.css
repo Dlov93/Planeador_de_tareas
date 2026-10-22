@@ -3,6 +3,7 @@
     --ColorSeleccion--Rojo: rgb(204, 144, 144);
     --ColorSeleccion--Verde: rgb(144, 204, 162);
     --ColorSeleccion--Amarillo: rgb(198, 204, 144);
+    --ColorSeleccion--Lila: rgb(121, 111, 160); 
 
 }
 #BotonGuardar{
@@ -32,7 +33,7 @@
 .datepicker-cell {
     width: 60px !important;  
     height: 60px !important; 
-    border: 1px solid #dee2e6 !important; 
+    border: 1px solid var(--ColorSeleccion--Rojo) !important; 
     border-radius: 0 !important;          
     
     /* Cambiamos a formato columna para que el dato quede debajo del número */
@@ -53,8 +54,8 @@
   /* El diseño de la etiquetita del dato */
   .dato-dia {
     font-size: 10px;
-    background-color: #0d6efd; /* Color azul de Bootstrap */
-    color: white;
+    background-color: var(--ColorSeleccion--Amarillo); /* Color azul de Bootstrap */
+    color: var(--ColorSeleccion--Amarillo);
     border-radius: 3px;
     text-align: center;
     padding: 1px;
@@ -67,16 +68,16 @@
   }
 
   .datepicker-cell:hover {
-    background-color: #f8f9fa !important;
+    background-color: var(--ColorBotones--blue) !important;
   }
   .sticker-tarea {
     
-    background-color: var(--ColorSeleccion--Amarillo, #fff3cd); 
-    border: 2px dashed #ffc107;
+    background-color: var(--ColorSeleccion--Lila); 
+    border: 2px dashed var(--ColorSeleccion--Verde);
     border-radius: 12px;
     padding: 15px;
     margin-bottom: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 6px var(--ColorBotones--blue);
     transition: transform 0.2s;
     
     /* ESTAS TRES LÍNEAS MÁGICAS EVITAN EL DESBORDE: */
@@ -103,7 +104,7 @@
     width: 14.28% !important;  
     height: auto !important; 
     min-height: 55px !important; 
-    border: 1px solid #dee2e6 !important; 
+    border: 1px solid var(--ColorSeleccion--Lila) !important; 
     border-radius: 0 !important;          
     display: flex !important;
     flex-direction: column !important; 
@@ -118,18 +119,7 @@
     margin-top: 2px;
 }
 
-.dato-dia {
-    font-size: 10px;
-    background-color: #0d6efd; 
-    color: white;
-    border-radius: 3px;
-    text-align: center;
-    padding: 1px;
-    margin-top: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+
 
 /* Ajustes especiales para Tablets (1024px y 768px) */
 @media (max-width: 1024px) {

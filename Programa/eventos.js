@@ -25,7 +25,7 @@ const contenedorOctubre = document.querySelector('#Contenedor-tareas-Oct');
 const contenedorDiciembre = document.querySelector('#Contenedor-tareas-Dic');
 
 
-//ebento paa guardar la tarea.
+//evento para guardar la tarea.
 boton.addEventListener('click', function () {
   //usamos la funcion de validacion de campos para validar los campos los atributos son los valores el form 
   const esValido = validateTaskForm(
@@ -48,7 +48,7 @@ boton.addEventListener('click', function () {
     //tomamos el valor de la fehca y sacamos el mes en numeros de ahi
     let fecha = LFecha.value;
     let mesTarea = fecha.split('-')[1]; 
-    //creamos el elemento del contenedor donde ira nuestra tarea con todos sus atributos
+    //creamos el elemento del contenedor donde ira nuestra tarea con todos sus atributos tipo stiker
     let stickerHTML = `<div class="sticker-tarea">
             <h5 class="fw-bold"> Nota del Planeador</h5>
             <p class="mb-0"><strong>ID:</strong> ${tareaCreada.id}</p>
@@ -59,7 +59,7 @@ boton.addEventListener('click', function () {
             <p class="mb-0"><strong>Prioridad:</strong> ${tareaCreada.estado}</p>
             <button class="btn btn-danger btn-sm mt-2 btn-eliminar" data-id="${tareaCreada.id}">Eliminar</button>
         </div>`;
-
+    //ecogemos en que mes queremos que se ponga la tarea
     if (mesTarea === "10") {
         contenedorOctubre.innerHTML += stickerHTML;
     } else if (mesTarea === "02") {
