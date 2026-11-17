@@ -1,13 +1,13 @@
 :root{
-    --ColorBotones--blue: rgb(40, 159, 238); 
-    --ColorSeleccion--Rojo: rgb(204, 144, 144);
-    --ColorSeleccion--Verde: rgb(144, 204, 162);
-    --ColorSeleccion--Amarillo: rgb(198, 204, 144);
-    --ColorSeleccion--Lila: rgb(121, 111, 160); 
+    --ColorBotones--blue: rgb(178, 215, 240); 
+    --ColorSeleccion--Rojo: rgb(244, 214, 214);
+    --ColorSeleccion--Verde: rgb(207, 247, 219);
+    --ColorSeleccion--Amarillo: rgb(249, 252, 221);
+    --ColorSeleccion--Lila: rgb(99, 71, 208); 
 
 }
 #BotonGuardar{
-    background-color: var(--ColorBotones--blue);
+    background-color: var(--ColorSeleccion--Lila);
 }
 #opcion_baja{
     background-color: var(--ColorSeleccion--Verde);
@@ -30,50 +30,20 @@
     margin-top: 40px
 
 }
-.datepicker-cell {
-    width: 60px !important;  
-    height: 60px !important; 
-    border: 1px solid var(--ColorSeleccion--Rojo) !important; 
-    border-radius: 0 !important;          
+
+#Contenedor-tareas {
+    display: flex;          
+    flex-wrap: wrap;       
+    gap: 15px;              
+}
+
+
+
     
-    /* Cambiamos a formato columna para que el dato quede debajo del número */
-    display: flex !important;
-    flex-direction: column !important; 
-    justify-content: flex-start !important; 
-    padding: 2px !important;
-  }
-
-  /* El número en la esquina superior derecha */
-  .numero-dia {
-    text-align: right;
-    font-size: 14px;
-    margin-right: 4px;
-    margin-top: 2px;
-  }
-
-  /* El diseño de la etiquetita del dato */
-  .dato-dia {
-    font-size: 10px;
-    background-color: var(--ColorSeleccion--Amarillo); /* Color azul de Bootstrap */
-    color: var(--ColorSeleccion--Amarillo);
-    border-radius: 3px;
-    text-align: center;
-    padding: 1px;
-    margin-top: 2px;
-    
-    /* Si el texto es muy largo, pone "..." para no deformar el cuadro */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .datepicker-cell:hover {
-    background-color: var(--ColorBotones--blue) !important;
-  }
   .sticker-tarea {
     
-    background-color: var(--ColorSeleccion--Lila); 
-    border: 2px dashed var(--ColorSeleccion--Verde);
+    /*background-color: var(--ColorSeleccion--Lila); 
+    border: 2px dashed var(--ColorSeleccion--Verde);*/
     border-radius: 12px;
     padding: 15px;
     margin-bottom: 10px;
@@ -91,36 +61,6 @@
     transform: scale(1.02); 
 }
 
-/*calendarios fluidos*/ 
-.datepicker,
-.datepicker-view,
-.datepicker-grid {
-    width: 100% !important;
-    max-width: 100% !important;
-}
-
-.datepicker-cell {
-    /* Mantiene el 100% dividido en los 7 días de la semana SIEMPRE */
-    width: 14.28% !important;  
-    height: auto !important; 
-    min-height: 55px !important; 
-    border: 1px solid var(--ColorSeleccion--Lila) !important; 
-    border-radius: 0 !important;          
-    display: flex !important;
-    flex-direction: column !important; 
-    justify-content: flex-start !important; 
-    padding: 2px !important;
-}
-
-.numero-dia {
-    text-align: right;
-    font-size: 14px;
-    margin-right: 4px;
-    margin-top: 2px;
-}
-
-
-
 /* Ajustes especiales para Tablets (1024px y 768px) */
 @media (max-width: 1024px) {
     .datepicker-cell {
@@ -134,6 +74,60 @@
         font-size: 9px;
     }
 }
+
+/* Estilos de la tarjeta del formulario */
+#Trajeta_Formulario {
+    background-color: rgb(252, 224, 247); /* Rosa suave que combina con tu cabecera */
+    border: 2px solid rgb(248, 196, 239);
+    border-radius: 16px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+#Trajeta_Formulario .form-label {
+    font-weight: 600;
+    color: #4a4a4a;
+}
+
+#Trajeta_Formulario .form-control {
+    border-radius: 10px;
+    border: 1px solid #e0b0d5;
+}
+
+/* Separación del botón Guardar */
+#BotonGuardar {
+    background-color: var(--ColorBotones--blue);
+    margin-top: 18px; /* Despega el botón de la última línea del form */
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+#BotonGuardar:hover {
+    transform: scale(1.02);
+    opacity: 0.9;
+}
+
+/* Botoncitos circulares para cambiar el color del formulario */
+.btn-tema {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-tema:hover {
+    transform: scale(1.15);
+}
+
+.btn-tema[data-color="rosa"] { background-color: rgb(248, 196, 239); }
+.btn-tema[data-color="lila"] { background-color: var(--ColorSeleccion--Lila); }
+.btn-tema[data-color="azul"] { background-color: var(--ColorBotones--blue); }
+
+
+
 
 /* Ajustes especiales para Celulares (hasta 767px) */
 @media (max-width: 767px) {
