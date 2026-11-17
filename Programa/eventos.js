@@ -111,6 +111,7 @@ boton.addEventListener('click', function () {
         LDescripcion.value = '';
         LAsignado.value = '';
         LBarra.value = 'Choose one…';
+        LBarra.style.backgroundColor = '#ffffff';
     }
 });
 
@@ -190,14 +191,23 @@ document.addEventListener('click', function (event) {
         const tema = event.target.dataset.color;
 
         if (tema === 'rosa') {
-            tarjetaFormulario.style.backgroundColor = 'rgb(252, 224, 247)';
-            tarjetaFormulario.style.borderColor = 'rgb(248, 196, 239)';
+            tarjetaFormulario.style.backgroundColor = 'rgb(249, 217, 243)';
+            tarjetaFormulario.style.borderColor = 'var(--ColorSeleccion--Rosa)';
+            boton.style.backgroundColor = 'var(--ColorBotones--Rosa)';
         } else if (tema === 'lila') {
             tarjetaFormulario.style.backgroundColor = 'rgb(218, 210, 244)';
             tarjetaFormulario.style.borderColor = 'var(--ColorSeleccion--Lila)';
+            boton.style.backgroundColor = 'var(--ColorBotones--Lila)';
         } else if (tema === 'azul') {
             tarjetaFormulario.style.backgroundColor = 'rgb(195, 229, 250)';
-            tarjetaFormulario.style.borderColor = 'var(--ColorBotones--blue)';
+            tarjetaFormulario.style.borderColor = 'var(--ColorBotones--Azul)';
+            boton.style.backgroundColor = 'var(--ColorBotones--Azul)';
+        }
+        else if (tema === 'defecto') {
+            // Vuelve al blanco clásico de Bootstrap (o al color base de tu CSS)
+            tarjetaFormulario.style.backgroundColor = 'rgb(238, 206, 189)';
+            tarjetaFormulario.style.borderColor = 'var(--ColorSeleccion--gris)';
+            boton.style.backgroundColor = 'var(--ColorBotones--Naranja)';
         }
     }
 });
