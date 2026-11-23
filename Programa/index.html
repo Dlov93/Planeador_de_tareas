@@ -7,73 +7,94 @@
     <title>Planeador Tareas DLOV</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Google Fonts: Poppins (Títulos) y Nunito (Lectura limpia de tareas) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker-bs5.min.css">
 </head>
 
 <body>
-    <header id="cabecera" class="header text-center">
-        <!--Header de la pagina-->
-        <h2>Planificador de Actividades</h2>
+    <header id="cabecera" class="header text-center py-3">
+        <h2 class="titulo-principal">Planificador de Actividades</h2>
+
+        <!-- Panel de contadores con colores armonizados -->
+        <div class="d-flex justify-content-center flex-wrap gap-2 mt-2" id="panel-estadisticas">
+            <span class="badge-stat stat-generadas">Generadas: <strong id="stat-generadas">0</strong></span>
+            <span class="badge-stat stat-baja">Baja: <strong id="stat-baja">0</strong></span>
+            <span class="badge-stat stat-media">Media: <strong id="stat-media">0</strong></span>
+            <span class="badge-stat stat-alta">Alta: <strong id="stat-alta">0</strong></span>
+            <span class="badge-stat stat-completadas">Completadas: <strong id="stat-completadas">0</strong></span>
+            <span class="badge-stat stat-eliminadas">Eliminadas: <strong id="stat-eliminadas">0</strong></span>
+        </div>
     </header>
     <!--rejilla principal del diseño de la pagina 4 columnas-->
     <div class="container-fluid mt-4">
 
         <div class="row">
-            <div class="col-lg-3 col-md-4 mb-4" id="columna_formulario">
+            <div class="col-lg-3 col-md-12 mb-4" id="columna_formulario">
                 <!--Formulario para asignacion de tarea-->
                 <div class="card p-3 shadow-sm" id="Trajeta_Formulario">
-    <div class="card-body text-center">
-        
-        <!-- Selector tema para la tarjeta -->
-        <div class="d-flex justify-content-end gap-2 mb-2">
-            <button type="button" class="btn-tema" data-color="defecto" title="Color por defecto"></button>
-            <button type="button" class="btn-tema" data-color="rosa" title="Tema Rosa"></button>
-            <button type="button" class="btn-tema" data-color="lila" title="Tema Lila"></button>
-            <button type="button" class="btn-tema" data-color="azul" title="Tema Azul"></button>
-        </div>
+                    <div class="card-body text-center">
 
-        <!--Tarjeta del formulario-->
-        <h4 class="card-title mb-3" id="Tarejta_form">Ingreso de Actividad</h4>
-        
-        <div class="form-field mb-2" id="campo_nombre_tarea">
-            <label for="NombreTarea" class="form-label">Nombre Tarea</label>
-            <input class="form-control" id="input_nombre_tarea">
-        </div>
-        <div class="form-field mb-2" id="campo_Descripcion">
-            <label for="DescripcionTarea" class="form-label" id="label_campo_Descripcion">Descripción</label>
-            <textarea class="form-control" id="input_Descripcion" rows="4"></textarea>
-        </div>
-        <div class="form-field mb-2" id="campo_AsignadoA">
-            <label for="PersonaAsignada" class="form-label" id="lable_campo_AsignadoA">Asignado a:</label>
-            <input class="form-control" id="input_campo_AsignadoA">
-        </div>
-        <div class="form-field mb-2" id="campo_fecha">
-            <label for="FechaFinalizacion" class="form-label" id="lable_campo_fecha">Fecha finalización</label>
-            <input type="datetime-local" class="form-control" aria-label="Date and time picker with seconds" value="" step="1" id="Fecha">
-        </div>
-        <div class="form-field mb-3">
-            <label for="Prioridad" class="form-label">Prioridad</label>
-            <select class="form-control" id="Barra_selectora">
-                <option selected>Choose one…</option>
-                <option value="Baja" id="opcion_baja">Baja</option>
-                <option value="Media" id="opcion_Media">Media</option>
-                <option value="Alta" id="opcion_Alta">Alta</option>
-            </select>
-        </div>
+                        <!-- Selector tema para la tarjeta -->
+                        <div class="d-flex justify-content-end gap-2 mb-2">
+                            <button type="button" class="btn-tema" data-color="defecto"
+                                title="Color por defecto"></button>
+                            <button type="button" class="btn-tema" data-color="rosa" title="Tema Rosa"></button>
+                            <button type="button" class="btn-tema" data-color="lila" title="Tema Lila"></button>
+                            <button type="button" class="btn-tema" data-color="azul" title="Tema Azul"></button>
+                        </div>
 
-        <!-- Con mt-3 o margin-top en CSS ya no queda pegado -->
-        <button type="button" class="btn mt-3 w-100 fw-bold text-purple" id="BotonGuardar">Guardar</button>
-    </div>
-</div>
+                        <!--Tarjeta del formulario-->
+                        <h4 class="card-title mb-3" id="Tarejta_form">Ingreso de Actividad</h4>
+
+                        <div class="form-field mb-2" id="campo_nombre_tarea">
+                            <label for="NombreTarea" class="form-label">Nombre Tarea</label>
+                            <input class="form-control" id="input_nombre_tarea">
+                        </div>
+                        <div class="form-field mb-2" id="campo_Descripcion">
+                            <label for="DescripcionTarea" class="form-label"
+                                id="label_campo_Descripcion">Descripción</label>
+                            <textarea class="form-control" id="input_Descripcion" rows="4"></textarea>
+                        </div>
+                        <div class="form-field mb-2" id="campo_AsignadoA">
+                            <label for="PersonaAsignada" class="form-label" id="lable_campo_AsignadoA">Asignado
+                                a:</label>
+                            <input class="form-control" id="input_campo_AsignadoA">
+                        </div>
+                        <div class="form-field mb-2" id="campo_fecha">
+                            <label for="FechaFinalizacion" class="form-label" id="lable_campo_fecha">Fecha
+                                finalización</label>
+                            <input type="datetime-local" class="form-control"
+                                aria-label="Date and time picker with seconds" value="" step="1" id="Fecha">
+                        </div>
+                        <div class="form-field mb-3">
+                            <label for="Prioridad" class="form-label">Prioridad</label>
+                            <select class="form-control" id="Barra_selectora">
+                                <option selected>Choose one…</option>
+                                <option value="Baja" id="opcion_baja">Baja</option>
+                                <option value="Media" id="opcion_Media">Media</option>
+                                <option value="Alta" id="opcion_Alta">Alta</option>
+                            </select>
+                        </div>
+
+                        <!-- Con mt-3 o margin-top en CSS ya no queda pegado -->
+                        <button type="button" class="btn mt-3 w-100 fw-bold text-purple"
+                            id="BotonGuardar">Guardar</button>
+                    </div>
+                </div>
                 <!--contenedores tareas-->
 
             </div>
-            <div class="col-lg-9 col-md-4">
+            <div class="col-lg-9 col-md-12">
                 <div class="row row-cols-1 row-cols-md-5 g-2 text-center " id="Contenedor-tareas">
-                    
-                    </div>
+
+                </div>
                 <div>
                     <div class="row row-cols-1 row-cols-md-5 g-2 text-center " id="Contenedor-tareas-finalizadas"></div>
                 </div>
@@ -81,8 +102,13 @@
 
         </div>
     </div>
+    <footer id="pie" class="footer text-center">
+        Copyrigth DLOV
+    </footer>
 
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="script.js"></script>
     <script src="eventos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
@@ -93,8 +119,6 @@
     </div>
     </div>
 </body>
-<footer id="pie" class="footer text-center">
-    Copyrigth DLOV
-</footer>
+
 
 </html>

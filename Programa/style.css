@@ -1,104 +1,204 @@
-:root{
-     
+:root {
     --ColorSeleccion--Rojo: rgb(244, 214, 214);
     --ColorSeleccion--Verde: rgb(207, 247, 219);
     --ColorSeleccion--Amarillo: rgb(249, 252, 221);
     --ColorSeleccion--Lila: rgb(164, 141, 253); 
-    
-    --ColorSeleccion--gris: rgb(137, 149, 153);
+    --ColorSeleccion--Gris: rgb(223, 226, 227);
 
     --ColorBotones--Lila: rgb(164, 141, 253);
     --ColorBotones--Rosa: rgb(254, 129, 231);
     --ColorBotones--Azul: rgb(67, 151, 241);
     --ColorBotones--Naranja: rgb(255, 165, 0);
 
+    --ColorBotones--rojo: rgb(223, 115, 115);
+    --ColorBotones--verde: rgb(105, 205, 135);
+    --ColorBotones--amarillo: rgb(237, 238, 132);
+
+    --ColorBody--Lila: rgb(228, 222, 249);
+    --ColorBody--Rosa: rgb(245, 232, 242);
+    --ColorBody--Azul: rgb(220, 234, 249);
+    --ColorBody--Naranja: rgb(251, 237, 228);
+
+    --Fuente--Titulos: 'Poppins', sans-serif;
+    --Fuente--Texto: 'Nunito', sans-serif;
 }
 
-#opcion_baja{
-    background-color: var(--ColorSeleccion--Verde);
+body {
+    font-family: var(--Fuente--Texto);
+    background-color: var(--ColorBody--Naranja);
+    color: #333333;
+    transition: background-color 0.4s ease;
 }
-#opcion_Media{
-    background-color: var(--ColorSeleccion--Amarillo);
+
+h1, h2, h3, h4, h5, .card-title, .titulo-principal {
+    font-family: var(--Fuente--Titulos);
+    letter-spacing: -0.3px;
 }
-#opcion_Alta{
-    background-color: var(--ColorSeleccion--Rojo);
-}
-#cabecera{
-    background-color: rgb(248, 196, 239);
-    height: 100px;
+
+#cabecera {
+    background-color: var(--ColorBotones--Naranja);
+    border-bottom: 2px solid var(--ColorSeleccion--Gris);
+    min-height: 100px;
+    height: auto;
+    padding: 15px 10px;
     align-content: center;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
-#pie{
-    background-color: rgb(248, 196, 239);
+#pie {
+    background-color: var(--ColorBotones--Naranja);
+    border-top: 2px solid var(--ColorSeleccion--Gris);
     height: 50px;
-    margin-top: 40px
-
+    margin-top: 40px;
+    align-content: center;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
-#Contenedor-tareas {
+/* ========================================================
+   CONTADORES DEL HEADER (Con tus variables existentes)
+   ======================================================== */
+.badge-stat {
+    font-family: var(--Fuente--Texto);
+    font-size: 0.9rem;
+    padding: 6px 14px;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    color: #2b2b2b;
+}
+
+.stat-generadas { background-color: var(--ColorBody--Naranja); }
+.stat-baja { background-color: var(--ColorSeleccion--Verde); }
+.stat-media { background-color: var(--ColorSeleccion--Amarillo); }
+.stat-alta { background-color: var(--ColorSeleccion--Rojo); }
+.stat-completadas { background-color: var(--ColorBody--Azul); }
+.stat-eliminadas { background-color: var(--ColorSeleccion--Gris); }
+
+#opcion_baja { background-color: var(--ColorSeleccion--Verde); }
+#opcion_Media { background-color: var(--ColorSeleccion--Amarillo); }
+#opcion_Alta { background-color: var(--ColorSeleccion--Rojo); }
+
+/* ========================================================
+   CONTENEDORES Y TARJETAS
+   ======================================================== */
+#Contenedor-tareas,
+#Contenedor-tareas-finalizadas {
     display: flex;          
     flex-wrap: wrap;       
     gap: 15px;              
 }
 
- .sticker-tarea {
-    
-    /*background-color: var(--ColorSeleccion--Lila); 
-    border: 2px dashed var(--ColorSeleccion--Verde);*/
+#Contenedor-tareas-finalizadas {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 2px dashed var(--ColorSeleccion--Gris);
+}
+
+.sticker-tarea {
+    text-align: left;
     border-radius: 12px;
     padding: 15px;
     margin-bottom: 10px;
-    box-shadow: 0 4px 6px var(--ColorBotones--blue);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
-    
-    /* ESTAS TRES LÍNEAS MÁGICAS EVITAN EL DESBORDE: */
-    word-wrap: break-word;       /*divide palabras para no se desborden*/
-    overflow-wrap: break-word;   /* Asegura que las palabras para no se desborden */
-    white-space: normal;         /* Permite que el texto fluya hacia abajo */
-
+    flex: 1 1 250px;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
 
 .sticker-tarea:hover {
     transform: scale(1.02); 
 }
 
-/* Ajustes especiales para Tablets (1024px y 768px) */
-@media (max-width: 1024px) {
-    .datepicker-cell {
-        min-height: 45px !important; /* Solo achicamos el alto, NUNCA el ancho */
-        padding: 1px !important;
-    }
-    .numero-dia {
-        font-size: 12px;
-    }
-    .dato-dia {
-        font-size: 9px;
-    }
+/* ========================================================
+   DISEÑO INTERNO DE LA TARJETA
+   ======================================================== */
+.badge-id {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #333333;
+    background-color: rgba(255, 255, 255, 0.65);
+    padding: 2px 8px;
+    border-radius: 6px;
 }
 
-/* Estilos de la tarjeta del formulario */
+.badge-prioridad {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #222222;
+    padding: 3px 10px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.badge-prioridad,
+.btn-eliminar {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.titulo-tarjeta {
+    font-family: var(--Fuente--Titulos);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #222222;
+    line-height: 1.3;
+}
+
+.descripcion-tarjeta {
+    font-size: 0.92rem;
+    color: #333333;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 8px 10px;
+    border-radius: 8px;
+    line-height: 1.4;
+}
+
+.meta-tarjeta {
+    font-size: 0.85rem;
+    color: #333333;
+}
+
+.pie-tarjeta {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.btn-eliminar {
+    color: #222222;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+}
+
+.check-completada {
+    cursor: pointer;
+    transform: scale(1.15);
+}
+
+/* ========================================================
+   FORMULARIO Y BOTONES DE TEMA
+   ======================================================== */
 #Trajeta_Formulario {
-    background-color: rgb(238, 206, 189); /* Rosa suave que combina con tu cabecera */
-    border: 2px solid rgb(230, 170, 121);
+    background-color: var(--ColorBody--Naranja);
+    border: 2px solid var(--ColorSeleccion--Gris);
     border-radius: 16px;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 #Trajeta_Formulario .form-label {
     font-weight: 600;
-    color: #4a4a4a;
+    color: #333333;
 }
 
 #Trajeta_Formulario .form-control {
     border-radius: 10px;
-    border: 1px solid #e0b0d5;
+    border: 1px solid var(--ColorSeleccion--Gris);
 }
 
-/* Separación del botón Guardar */
 #BotonGuardar {
     background-color: var(--ColorBotones--Naranja);
-    margin-top: 18px; /* Despega el botón de la última línea del form */
+    margin-top: 18px;
     padding: 10px 20px;
     border-radius: 10px;
     transition: transform 0.2s, opacity 0.2s;
@@ -109,7 +209,6 @@
     opacity: 0.9;
 }
 
-/* Botoncitos circulares para cambiar el color del formulario */
 .btn-tema {
     width: 22px;
     height: 22px;
@@ -129,15 +228,19 @@
 .btn-tema[data-color="azul"] { background-color: var(--ColorBotones--Azul); }
 .btn-tema[data-color="defecto"] { background-color: var(--ColorBotones--Naranja); }
 
-/* Ajustes especiales para Celulares (hasta 767px) */
+@media (max-width: 1024px) {
+    .datepicker-cell {
+        min-height: 45px !important;
+        padding: 1px !important;
+    }
+    .numero-dia { font-size: 12px; }
+    .dato-dia { font-size: 9px; }
+}
+
 @media (max-width: 767px) {
     .datepicker-cell {
         min-height: 40px !important; 
     }
-    .numero-dia {
-        font-size: 11px;
-    }
-    .dato-dia {
-        font-size: 8px;
-    }
+    .numero-dia { font-size: 11px; }
+    .dato-dia { font-size: 8px; }
 }
