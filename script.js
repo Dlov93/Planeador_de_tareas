@@ -1,61 +1,132 @@
-/// CLASE TASKMANAGER
+
+
+const API_URL = "https://tu-url-del-backend.com/api/tasks";
+
+// CLASE TASKMANAGER 
 class TaskManager {
-  tasks = JSON.parse(localStorage.getItem('misTareas')) || [];     
-  currentId = Number(localStorage.getItem('ultimoId')) || 0;
-  
-  // Contadores históricos guardados en localStorage
-  totalGeneradas = Number(localStorage.getItem('totalGeneradas')) || 0;
-  totalEliminadas = Number(localStorage.getItem('totalEliminadas')) || 0;
+  tasks = [];
+  totalGeneradas = 0;
+  totalEliminadas = 0;
 
-  saveToLocalStorage() {
-    localStorage.setItem('misTareas', JSON.stringify(this.tasks));
-    localStorage.setItem('ultimoId', this.currentId.toString());
-    localStorage.setItem('totalGeneradas', this.totalGeneradas.toString());
-    localStorage.setItem('totalEliminadas', this.totalEliminadas.toString());
-  }
+  // 1. GET: Obtener todas las tareas desde MySQL
+  async loadTasksFromAPI() {
+    const response = await fetch(API_URL);
+    if (!response.ok) {
+      throw new Error("Error al obtener las tareas del servidor");
+    }
+    const data = await response.json();
 
-  addTask(nombre, descripcion, asignadoA, fechaDeEntrega, estado) {
-    this.currentId++;
-    this.totalGeneradas++; // Sumamos al historial de creadas
-    
-    const nuevaTarea = {
-      id: this.currentId,   
-      nombre: nombre,       
-      descripcion: descripcion, 
-      asignadoA: asignadoA,  
-      fechaDeEntrega: fechaDeEntrega, 
-      estado: estado,
-      completada: false
-    };
-    this.tasks.push(nuevaTarea);   
-    this.saveToLocalStorage();
-    return nuevaTarea;    
+    // Traducimos los campos del Backend (inglés) a tu Frontend (español)
+    this.tasks = data.map(t => ({
+      id: t.id,
+      nombre: t.name,
+      descripcion: t.description,
+      asignadoA: t.assignedTo,
+      fechaDeEntrega: t.dueDate,
+      estado: t.status,
+      completada: t.completed
+    }));
+
+    // Sincronizamos el contador de generadas con las existentes
+    if (this.totalGeneradas < this.tasks.length) {
+      this.totalGeneradas = this.tasks.length;
+    }
+
+    return this.tasks;
   }
 
   getAllTasks() {
     return this.tasks;
   }
 
-  deleteTask(taskId) {
+  // 2. POST: Crear una nueva tarea en el Backend
+  async addTask(nombre, descripcion, asignadoA, fechaDeEntrega, estado) {
+    // Preparamos el JSON con los nombres exactos que espera Spring Boot
+    const payload = {
+      name: nombre,
+      description: descripcion,
+      assignedTo: asignadoA,
+      dueDate: fechaDeEntrega,
+      status: estado,
+      completed: false
+    };
+
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error("No se pudo guardar la tarea en el servidor");
+    }
+
+    const t = await response.json(); // Recibimos la tarea con el ID generado por MySQL
+
+    const nuevaTarea = {
+      id: t.id,
+      nombre: t.name,
+      descripcion: t.description,
+      asignadoA: t.assignedTo,
+      fechaDeEntrega: t.dueDate,
+      estado: t.status,
+      completada: t.completed
+    };
+
+    this.tasks.push(nuevaTarea);
+    this.totalGeneradas++;
+    return nuevaTarea;
+  }
+
+  // 3. PUT: Actualizar el estado completada en el Backend
+  async toggleTaskCompletion(taskId, isCompleted) {
+    const tarea = this.tasks.find(t => t.id === taskId);
+    if (!tarea) return;
+
+    const payload = {
+      name: tarea.nombre,
+      description: tarea.descripcion,
+      assignedTo: tarea.asignadoA,
+      dueDate: tarea.fechaDeEntrega,
+      status: tarea.estado,
+      completed: isCompleted
+    };
+
+    const response = await fetch(`${API_URL}/${taskId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error("Error al actualizar el estado de la tarea");
+    }
+
+    tarea.completada = isCompleted;
+  }
+
+  // 4. DELETE: Eliminar una tarea por ID en el Backend
+  async deleteTask(taskId) {
+    const response = await fetch(`${API_URL}/${taskId}`, {
+      method: "DELETE"
+    });
+
+    if (!response.ok) {
+      throw new Error("Error al eliminar la tarea en el servidor");
+    }
+
     const cantidadAntes = this.tasks.length;
     this.tasks = this.tasks.filter(tarea => tarea.id !== taskId);
-    
-    // Si efectivamente se borró una tarea, incrementamos el contador de eliminadas
     if (this.tasks.length < cantidadAntes) {
       this.totalEliminadas++;
     }
-    this.saveToLocalStorage();
   }
 
-  toggleTaskCompletion(taskId, isCompleted) {
-    const tarea = this.tasks.find(t => t.id === taskId);
-    if (tarea) {
-      tarea.completada = isCompleted;
-      this.saveToLocalStorage();
-    }
-  }
-
-  // Método que devuelve el resumen completo para el header
+  // Resumen estadístico para los contadores del header
   getEstadisticas() {
     return {
       generadas: this.totalGeneradas,
@@ -68,7 +139,7 @@ class TaskManager {
   }
 }
 
-// Validación formulario (Se mantiene exactamente igual)
+// Validación del formulario (Se mantiene igual)
 function validateTaskForm(nombre, descripcion, asignadoA, fecha, estado) {
   if (nombre.trim() === "" || nombre.trim().length <= 8) {
     Swal.fire({
@@ -115,5 +186,5 @@ function validateTaskForm(nombre, descripcion, asignadoA, fecha, estado) {
     });
     return false;
   }
-  return true; 
+  return true;
 }
